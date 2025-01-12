@@ -1,0 +1,31 @@
+FROM ubuntu:22.04
+
+LABEL maintainer="Ryuden <master+geekbench@ryuden.org>"
+
+# install
+RUN apt-get update \
+    && apt-get install software-properties-common -y \
+    && add-apt-repository universe \
+    && apt-get install -y \
+    gcc \
+    libstdc++6 \
+    libncurses5 libncurses5-dev \
+    curl \
+    unzip \
+    sudo \
+    dmidecode
+
+# PATH before 2025/01/13
+# RUN curl -O https://www.passmark.com/downloads/pt_linux_x64.zip  \
+#     && unzip pt_linux_x64.zip \
+#     && rm -f pt_linux_x64.zip \
+#     && chmod +x ./PerformanceTest/pt_linux_x64 
+
+RUN curl -O https://www.passmark.com/downloads/PerformanceTest_Linux_x86-64.zip \
+    && unzip PerformanceTest_Linux_x86-64.zip \
+    && rm -f PerformanceTest_Linux_x86-64.zip \
+    && chmod +x ./PerformanceTest/pt_linux_x64 
+
+WORKDIR /PerformanceTest/
+
+ENTRYPOINT /PerformanceTest/pt_linux_x64 -r 3 && cat results_all.yml | grep -E --color=always 'SUMM_CPU|SUMM_ME|$'

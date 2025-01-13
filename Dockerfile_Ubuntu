@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-LABEL maintainer="Ryuden <master+geekbench@ryuden.org>"
+LABEL maintainer="Ryuden <master+passmark@ryuden.org>"
 
 # install
 RUN apt-get update \

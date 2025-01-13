@@ -2,8 +2,16 @@
 
 ## Run
 
+### Ubuntu base
+
 ```
-git clone https://github.com/ryudenx/docker-passmark.git
-docker build -t ryudenx/passmark:latest docker-passmark/
-docker run --rm -it --privileged ryudenx/passmark:latest
+docker build -t ryudenx/passmark-ubuntu:latest https://github.com/ryudenx/docker-passmark.git -f Dockerfile_Ubuntu
+docker run --rm -it --privileged ryudenx/passmark-ubuntu:latest
+```
+
+### Rocky Linux base
+
+```
+docker build -t ryudenx/passmark-rocky:latest https://github.com/ryudenx/docker-passmark.git -f Dockerfile_Rocky
+docker run --rm -it --privileged ryudenx/passmark-rocky:latest
 ```
